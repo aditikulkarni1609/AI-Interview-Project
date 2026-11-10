@@ -5,7 +5,11 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-const JWT_SECRET = "hehehehehehehehehe";
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET is not set. Add it to BACKEND/.env - see .env.example");
+}
 
 router.post("/login", async (req, res) => {
   try {
